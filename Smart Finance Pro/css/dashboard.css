@@ -1,0 +1,943 @@
+/* ==========================================================================
+   Smart Finance Pro - Component & Feature Dashboard Layouts
+   ========================================================================== */
+
+/* --- KPI Summary Cards --- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.kpi-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Glowing backgrounds for KPI cards */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.kpi-card.kpi-balance::before { background-color: var(--color-primary); }
+.kpi-card.kpi-income::before { background-color: var(--color-success); }
+.kpi-card.kpi-expenses::before { background-color: var(--color-danger); }
+.kpi-card.kpi-savings::before { background-color: var(--color-info); }
+
+.kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kpi-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.kpi-icon-wrapper {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--border-glass);
+}
+.kpi-card.kpi-balance .kpi-icon-wrapper { color: var(--color-primary); }
+.kpi-card.kpi-income .kpi-icon-wrapper { color: var(--color-success); }
+.kpi-card.kpi-expenses .kpi-icon-wrapper { color: var(--color-danger); }
+.kpi-card.kpi-savings .kpi-icon-wrapper { color: var(--color-info); }
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.kpi-footer {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kpi-footer span {
+  font-weight: 700;
+}
+.trend-up { color: var(--color-success); }
+.trend-down { color: var(--color-danger); }
+
+/* --- Financial Health Card --- */
+.health-score-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.health-radial {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--bg-glass-card-hover) 79%, transparent 80% 100%),
+              conic-gradient(var(--health-color, var(--color-primary)) calc(var(--health-percent, 0) * 1%), var(--border-glass) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow-glass);
+}
+
+.health-radial-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.health-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+.health-badge {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+}
+.health-badge.excellent { background-color: var(--color-success); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+.health-badge.good { background-color: var(--color-info); box-shadow: 0 0 10px rgba(6, 182, 212, 0.4); }
+.health-badge.average { background-color: var(--color-warning); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+.health-badge.poor { background-color: var(--color-danger); box-shadow: 0 0 10px rgba(244, 63, 94, 0.4); }
+
+.health-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* --- Dashboard Grid Sections --- */
+.dashboard-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.dashboard-row-equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.dashboard-full {
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+/* --- Table Styles --- */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-glass);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr {
+  transition: background-color var(--transition-fast);
+}
+.table tbody tr:hover {
+  background-color: var(--bg-glass-card-hover);
+}
+
+/* Badge categories */
+.badge {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-income {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--color-success);
+}
+.badge-expense {
+  background-color: rgba(244, 63, 94, 0.12);
+  color: var(--color-danger);
+}
+
+.text-income { color: var(--color-success); font-weight: 700; }
+.text-expense { color: var(--color-danger); font-weight: 700; }
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+/* --- Empty and Loading States --- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  gap: 16px;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.empty-state-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-state-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 320px;
+}
+
+/* --- Budget Planner Elements --- */
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.budget-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.budget-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.budget-category-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.budget-progress-container {
+  width: 100%;
+}
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-glass);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0%;
+  transition: width var(--transition-normal) ease-in-out;
+}
+.progress-safe { background-color: var(--color-success); }
+.progress-warning { background-color: var(--color-warning); }
+.progress-exceeded { background-color: var(--color-danger); }
+
+.budget-vals {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.budget-remaining {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+  margin-top: 4px;
+}
+.budget-remaining.safe { color: var(--color-success); }
+.budget-remaining.warning { color: var(--color-warning); }
+.budget-remaining.exceeded { color: var(--color-danger); }
+
+/* Warning box */
+.warning-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.warning-box.warning {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: var(--color-warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.warning-box.danger {
+  background-color: rgba(244, 63, 94, 0.12);
+  color: var(--color-danger);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+/* --- Savings Goals View --- */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.goal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.goal-status-badge {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 10px;
+  color: #fff;
+}
+.goal-status-badge.completed { background-color: var(--color-success); }
+.goal-status-badge.on-track { background-color: var(--color-info); }
+.goal-status-badge.behind { background-color: var(--color-warning); }
+.goal-status-badge.overdue { background-color: var(--color-danger); }
+
+.goal-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-glass);
+  padding-top: 12px;
+}
+.goal-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.goal-detail-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.goal-detail-val {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.goal-estimate-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--bg-glass-card);
+  padding: 8px 12px;
+  border-radius: var(--border-radius-sm);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* --- EMI Calculator layout --- */
+.emi-split {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+}
+
+.emi-results-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.emi-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.emi-kpi-card {
+  background-color: var(--bg-app);
+  padding: 16px;
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  border: 1px solid var(--border-glass);
+}
+.emi-kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.emi-kpi-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+.emi-kpi-val.highlight {
+  color: var(--color-primary);
+  font-size: 20px;
+}
+
+.chart-holder {
+  position: relative;
+  height: 200px;
+  width: 100%;
+}
+
+/* Amortization schedule details */
+.amortization-container {
+  margin-top: 16px;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-sm);
+}
+
+/* --- Financial Insights --- */
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.insight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-left: 4px solid var(--color-primary);
+}
+.insight-card.insight-success { border-left-color: var(--color-success); }
+.insight-card.insight-warning { border-left-color: var(--color-warning); }
+.insight-card.insight-danger { border-left-color: var(--color-danger); }
+.insight-card.insight-info { border-left-color: var(--color-info); }
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.insight-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.insight-success .insight-icon { background-color: rgba(16, 185, 129, 0.12); color: var(--color-success); }
+.insight-warning .insight-icon { background-color: rgba(245, 158, 11, 0.12); color: var(--color-warning); }
+.insight-danger .insight-icon { background-color: rgba(244, 63, 94, 0.12); color: var(--color-danger); }
+.insight-info .insight-icon { background-color: rgba(6, 182, 212, 0.12); color: var(--color-info); }
+
+.insight-title {
+  font-size: 14px;
+  font-weight: 800;
+}
+.insight-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+.insight-advice {
+  font-size: 11px;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-glass);
+  padding-top: 8px;
+  line-height: 1.4;
+}
+
+/* --- Achievement System Elements --- */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.achievement-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  gap: 12px;
+  opacity: 0.55;
+  filter: grayscale(1);
+  transition: all var(--transition-normal);
+}
+
+.achievement-card.unlocked {
+  opacity: 1;
+  filter: grayscale(0);
+  background: linear-gradient(135deg, var(--bg-glass-card), rgba(99, 102, 241, 0.04));
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.achievement-trophy {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: all var(--transition-normal);
+}
+
+.achievement-card.unlocked .achievement-trophy {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.02) 70%);
+  color: var(--color-warning);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+  animation: pulse-glow 2s infinite alternate;
+}
+
+.achievement-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+.achievement-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+.achievement-date {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1); }
+  100% { transform: scale(1.04); box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3); }
+}
+
+/* --- Calendar View Layout --- */
+.calendar-wrapper {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 24px;
+}
+
+.calendar-header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.calendar-month-year {
+  font-size: 18px;
+  font-weight: 800;
+}
+.calendar-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.calendar-day-header {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+.calendar-cell {
+  aspect-ratio: 1.2;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-sm);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-glass-card);
+  transition: all var(--transition-fast);
+  min-height: 70px;
+}
+.calendar-cell:hover {
+  background-color: var(--bg-glass-card-hover);
+}
+
+.calendar-cell.other-month {
+  opacity: 0.3;
+}
+.calendar-cell.today {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.calendar-date-number {
+  font-size: 12px;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+.calendar-events-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.calendar-event-dot {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+.calendar-event-dot.rent, .calendar-event-dot.bills {
+  background-color: rgba(244, 63, 94, 0.12);
+  color: var(--color-danger);
+}
+.calendar-event-dot.goal {
+  background-color: rgba(6, 182, 212, 0.12);
+  color: var(--color-info);
+}
+.calendar-event-dot.emi {
+  background-color: rgba(99, 102, 241, 0.12);
+  color: var(--color-primary);
+}
+
+.calendar-event-list-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.upcoming-event-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-glass);
+}
+.upcoming-event-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upcoming-event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-grow: 1;
+}
+.upcoming-event-name { font-size: 13px; font-weight: 700; }
+.upcoming-event-date { font-size: 11px; color: var(--text-secondary); }
+
+/* --- Analytics Tab Styles --- */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-container {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+}
+
+/* --- Reports View & PDF Styles --- */
+.report-generate-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.report-preview-pane {
+  background-color: #ffffff;
+  color: #1a202c;
+  padding: 40px;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #e2e8f0;
+}
+
+/* PDF layout specificity */
+.pdf-header {
+  border-bottom: 2px solid #6366f1;
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.pdf-logo { font-size: 22px; font-weight: 800; color: #6366f1; }
+.pdf-meta { font-size: 12px; color: #718096; text-align: right; }
+
+.pdf-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.pdf-kpi {
+  background-color: #f7fafc;
+  border: 1px solid #edf2f7;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+}
+.pdf-kpi-label { font-size: 10px; font-weight: 700; color: #718096; text-transform: uppercase; margin-bottom: 4px; }
+.pdf-kpi-val { font-size: 18px; font-weight: 800; color: #1a202c; }
+
+.pdf-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pdf-section-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #2d3748;
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pdf-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pdf-table th { background-color: #f7fafc; border-bottom: 1px solid #edf2f7; padding: 10px; font-size: 10px; font-weight: 700; text-align: left; color: #718096; }
+.pdf-table td { padding: 10px; border-bottom: 1px solid #edf2f7; font-size: 12px; }
+
+.pdf-insights-list { display: flex; flex-direction: column; gap: 8px; }
+.pdf-insight-item { font-size: 12px; line-height: 1.5; color: #4a5568; background-color: #f7fafc; padding: 10px 14px; border-left: 3px solid #6366f1; border-radius: 0 6px 6px 0; }
+
+.pdf-footer {
+  border-top: 1px solid #edf2f7;
+  padding-top: 12px;
+  font-size: 10px;
+  color: #a0aec0;
+  text-align: center;
+  margin-top: auto;
+}
+
+/* --- Responsiveness & Screen Queries --- */
+@media (max-width: 1024px) {
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+  .calendar-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: var(--sidebar-collapsed-width);
+  }
+  
+  .sidebar-logo span,
+  .sidebar-menu-item span,
+  .user-info,
+  .sidebar-footer i {
+    display: none;
+  }
+  
+  .sidebar-logo {
+    padding-left: 4px;
+  }
+  .sidebar-menu-item {
+    justify-content: center;
+    padding: 14px 0;
+  }
+  .sidebar-menu-item.active {
+    border-left: none;
+    border-bottom: 3px solid var(--color-primary);
+    border-radius: 0;
+  }
+  
+  .dashboard-row-equal, .charts-grid, .emi-split {
+    grid-template-columns: 1fr;
+  }
+  
+  .top-bar {
+    padding: 0 16px;
+  }
+  
+  .content-view {
+    padding: 16px;
+  }
+  
+  .pdf-kpis {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: 60px;
+    flex-direction: row;
+    padding: 0 16px;
+    align-items: center;
+    border-right: none;
+    border-bottom: 1px solid var(--border-glass);
+  }
+  
+  .sidebar-logo {
+    margin-bottom: 0;
+  }
+  
+  .sidebar-menu {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 0;
+  }
+  
+  .sidebar-menu-item {
+    padding: 8px 12px;
+  }
+  
+  .sidebar-footer {
+    display: none;
+  }
+  
+  .main-wrapper {
+    height: calc(100vh - 60px);
+  }
+  
+  .top-bar {
+    height: 64px;
+  }
+  
+  .page-title {
+    font-size: 18px;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .emi-kpi-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-grid {
+    gap: 4px;
+  }
+  
+  .calendar-cell {
+    min-height: 50px;
+    padding: 2px;
+  }
+  
+  .calendar-date-number {
+    font-size: 10px;
+  }
+  
+  .calendar-event-dot {
+    font-size: 7px;
+    padding: 0 2px;
+  }
+}

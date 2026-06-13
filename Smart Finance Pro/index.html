@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Finance Pro | Premium Personal Finance SaaS</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- App Main Wrapper -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <i data-lucide="wallet"></i>
+        <span>SmartFinance<span style="color:var(--text-main)">Pro</span></span>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <a href="#dashboard" class="sidebar-menu-item active" data-target="dashboard">
+          <i data-lucide="layout-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#transactions" class="sidebar-menu-item" data-target="transactions">
+          <i data-lucide="arrow-left-right"></i>
+          <span>Transactions</span>
+        </a>
+        <a href="#budget" class="sidebar-menu-item" data-target="budget">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Budget Planner</span>
+        </a>
+        <a href="#goals" class="sidebar-menu-item" data-target="goals">
+          <i data-lucide="target"></i>
+          <span>Savings Goals</span>
+        </a>
+        <a href="#calendar" class="sidebar-menu-item" data-target="calendar">
+          <i data-lucide="calendar"></i>
+          <span>Financial Calendar</span>
+        </a>
+        <a href="#emi" class="sidebar-menu-item" data-target="emi">
+          <i data-lucide="calculator"></i>
+          <span>EMI Calculator</span>
+        </a>
+        <a href="#analytics" class="sidebar-menu-item" data-target="analytics">
+          <i data-lucide="pie-chart"></i>
+          <span>Analytics</span>
+        </a>
+        <a href="#reports" class="sidebar-menu-item" data-target="reports">
+          <i data-lucide="file-text"></i>
+          <span>Monthly Reports</span>
+        </a>
+        <a href="#settings" class="sidebar-menu-item" data-target="settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">JD</div>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-role">SaaS Pro Plan</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+      
+      <!-- Top Navigation Header -->
+      <header class="top-bar">
+        <div class="page-title-container">
+          <h1 class="page-title" id="currentViewTitle">Dashboard</h1>
+          <span class="page-subtitle" id="currentViewSubtitle">Overview of your current financial standing.</span>
+        </div>
+        
+        <div class="top-bar-controls">
+          <button class="btn btn-secondary btn-icon" id="themeToggle" title="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+          <button class="btn btn-primary btn-sm" id="quickAddTxBtn">
+            <i data-lucide="plus"></i> Add Transaction
+          </button>
+        </div>
+      </header>
+      
+      <!-- SPA Views Container -->
+      <div class="main-content">
+
+        <!-- 1. DASHBOARD VIEW -->
+        <section id="view-dashboard" class="content-view active">
+          <!-- KPI Row -->
+          <div class="kpi-grid">
+            <div class="glass-card kpi-card kpi-balance">
+              <div class="kpi-header">
+                <span class="kpi-title">Net Worth</span>
+                <div class="kpi-icon-wrapper"><i data-lucide="piggy-bank"></i></div>
+              </div>
+              <div class="kpi-value" id="kpi-balance-val">₹0</div>
+              <div class="kpi-footer"><i data-lucide="trending-up" class="trend-up"></i><span>Safe</span> status</div>
+            </div>
+            
+            <div class="glass-card kpi-card kpi-income">
+              <div class="kpi-header">
+                <span class="kpi-title">Monthly Income</span>
+                <div class="kpi-icon-wrapper"><i data-lucide="arrow-down-left"></i></div>
+              </div>
+              <div class="kpi-value" id="kpi-income-val">₹0</div>
+              <div class="kpi-footer" id="kpi-income-footer">This month</div>
+            </div>
+            
+            <div class="glass-card kpi-card kpi-expenses">
+              <div class="kpi-header">
+                <span class="kpi-title">Monthly Expenses</span>
+                <div class="kpi-icon-wrapper"><i data-lucide="arrow-up-right"></i></div>
+              </div>
+              <div class="kpi-value" id="kpi-expense-val">₹0</div>
+              <div class="kpi-footer" id="kpi-expense-footer">0% of budget</div>
+            </div>
+            
+            <div class="glass-card kpi-card kpi-savings">
+              <div class="kpi-header">
+                <span class="kpi-title">Monthly Savings Rate</span>
+                <div class="kpi-icon-wrapper"><i data-lucide="percent"></i></div>
+              </div>
+              <div class="kpi-value" id="kpi-savings-val">0%</div>
+              <div class="kpi-footer" id="kpi-savings-footer">Net Saved: ₹0</div>
+            </div>
+          </div>
+          
+          <div class="dashboard-row">
+            <!-- Left Side: Recent Transactions & Health Score -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <!-- Financial Health Score Card -->
+              <div class="glass-card">
+                <div class="section-header">
+                  <h3 class="section-title">Financial Health Status</h3>
+                  <button class="btn btn-secondary btn-sm" id="healthExplainBtn">Calculation Details</button>
+                </div>
+                <div class="health-score-container">
+                  <div class="health-radial" id="dashboard-health-radial">
+                    <span class="health-radial-value" id="dashboard-health-score">0</span>
+                  </div>
+                  <div class="health-info">
+                    <span class="health-badge excellent" id="dashboard-health-badge">Excellent</span>
+                    <p class="health-desc" id="dashboard-health-desc">Generating customized assessment...</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Recent Transactions Table -->
+              <div class="glass-card">
+                <div class="section-header">
+                  <h3 class="section-title">Recent Transactions</h3>
+                  <button class="btn btn-secondary btn-sm" id="dashboardViewAllTx">View History</button>
+                </div>
+                <div class="table-container">
+                  <table class="table" id="dashboardRecentTxTable">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Rendered by js -->
+                    </tbody>
+                  </table>
+                  <div class="empty-state" id="dashboardRecentTxEmpty" style="display:none;">
+                    <div class="empty-state-icon"><i data-lucide="inbox"></i></div>
+                    <span class="empty-state-title">No transactions found</span>
+                    <span class="empty-state-desc">Start adding records using the "Add Transaction" button.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Right Side: Mini Budget Progress & Goal Sneak-peek -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <!-- Quick Budget Summary -->
+              <div class="glass-card">
+                <h3 class="section-title" style="margin-bottom:16px;">Active Budgets</h3>
+                <div style="display:flex; flex-direction:column; gap:16px;" id="dashboardBudgetsSummary">
+                  <!-- Rendered by js -->
+                </div>
+              </div>
+              
+              <!-- Quick Savings Goals Summary -->
+              <div class="glass-card">
+                <h3 class="section-title" style="margin-bottom:16px;">Active Savings Goals</h3>
+                <div style="display:flex; flex-direction:column; gap:16px;" id="dashboardGoalsSummary">
+                  <!-- Rendered by js -->
+                </div>
+              </div>
+              
+              <!-- Upcoming Payments Warning -->
+              <div class="glass-card">
+                <h3 class="section-title" style="margin-bottom:16px;">Upcoming Payments</h3>
+                <div style="display:flex; flex-direction:column; gap:12px;" id="dashboardUpcomingSummary">
+                  <!-- Rendered by js -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. TRANSACTIONS VIEW -->
+        <section id="view-transactions" class="content-view">
+          <!-- Filters & Actions Bar -->
+          <div class="glass-card" style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;">
+            <div style="display:flex; flex-wrap:wrap; gap:16px; flex-grow:1;">
+              <!-- Search -->
+              <div style="position:relative; width: 220px;">
+                <input type="text" class="form-control" id="txSearchInput" placeholder="Search description...">
+              </div>
+              <!-- Category Filter -->
+              <div style="width: 160px;">
+                <select class="form-select" id="txFilterCategory">
+                  <option value="">All Categories</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Freelancing">Freelancing</option>
+                  <option value="Food">Food</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Shopping">Shopping</option>
+                  <option value="Bills">Bills</option>
+                  <option value="Education">Education</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Investment">Investment</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <!-- Date Range Filter -->
+              <div style="width: 160px;">
+                <select class="form-select" id="txFilterDate">
+                  <option value="">All Dates</option>
+                  <option value="this-month">This Month</option>
+                  <option value="last-30">Last 30 Days</option>
+                  <option value="last-3-months">Last 3 Months</option>
+                </select>
+              </div>
+            </div>
+            
+            <div style="display:flex; gap:12px;">
+              <button class="btn btn-secondary" id="txSortDateBtn">
+                <i data-lucide="arrow-up-down"></i> Sort Date
+              </button>
+              <button class="btn btn-secondary" id="txSortAmountBtn">
+                <i data-lucide="arrow-up-down"></i> Sort Amount
+              </button>
+            </div>
+          </div>
+          
+          <!-- Transactions Table -->
+          <div class="glass-card">
+            <div class="table-container">
+              <table class="table" id="transactionsTable">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rendered by js -->
+                </tbody>
+              </table>
+              <div class="empty-state" id="transactionsEmpty" style="display:none;">
+                <div class="empty-state-icon"><i data-lucide="search-code"></i></div>
+                <span class="empty-state-title">No transactions match filters</span>
+                <span class="empty-state-desc">Try clearing search terms or selecting another category filter.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. BUDGET PLANNER VIEW -->
+        <section id="view-budget" class="content-view">
+          <div class="glass-card">
+            <div class="section-header">
+              <div>
+                <h3 class="section-title">Configure Category Budgets</h3>
+                <span class="page-subtitle">Allocate spending limits across categories for this month.</span>
+              </div>
+              <button class="btn btn-primary" id="openAddBudgetBtn">Configure Budget</button>
+            </div>
+            <!-- Alert Display -->
+            <div id="budgetAlertsContainer"></div>
+          </div>
+          
+          <!-- Category Budget Cards -->
+          <div class="budget-grid" id="categoryBudgetsGrid">
+            <!-- Dynamic Grid Items -->
+          </div>
+        </section>
+
+        <!-- 4. SAVINGS GOALS VIEW -->
+        <section id="view-goals" class="content-view">
+          <div class="section-header">
+            <h3 class="section-title">Track Savings Milestones</h3>
+            <button class="btn btn-primary" id="openAddGoalBtn">
+              <i data-lucide="plus"></i> Create Savings Goal
+            </button>
+          </div>
+          
+          <!-- Goals Cards Grid -->
+          <div class="goals-grid" id="goalsGrid">
+            <!-- Dynamic goals -->
+          </div>
+        </section>
+
+        <!-- 5. FINANCIAL CALENDAR VIEW -->
+        <section id="view-calendar" class="content-view">
+          <div class="calendar-wrapper">
+            <!-- Calendar Grid -->
+            <div class="glass-card">
+              <div class="calendar-header-nav">
+                <h2 class="calendar-month-year" id="calendarMonthYear">June 2026</h2>
+                <div class="calendar-controls">
+                  <button class="btn btn-icon btn-sm" id="calPrevBtn"><i data-lucide="chevron-left"></i></button>
+                  <button class="btn btn-icon btn-sm" id="calTodayBtn">Today</button>
+                  <button class="btn btn-icon btn-sm" id="calNextBtn"><i data-lucide="chevron-right"></i></button>
+                </div>
+              </div>
+              
+              <div class="calendar-grid" id="calendarGridContainer">
+                <!-- Days labels and numbers rendering in JS -->
+              </div>
+            </div>
+            
+            <!-- Side Events & Add Recurring Bill -->
+            <div class="calendar-event-list-sidebar">
+              <!-- Configure Recurring Rule -->
+              <div class="glass-card">
+                <h3 class="section-title" style="margin-bottom:16px;">Add Recurring Payment</h3>
+                <form id="addRecurringForm" style="display:flex; flex-direction:column; gap:12px;">
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="recName">Payment Name</label>
+                    <input type="text" class="form-control" id="recName" required placeholder="Netflix, Gym, Rent...">
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="recAmount">Amount</label>
+                    <input type="number" class="form-control" id="recAmount" required placeholder="Amount">
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="recCategory">Category</label>
+                    <select class="form-select" id="recCategory" required>
+                      <option value="Bills">Bills</option>
+                      <option value="Food">Food</option>
+                      <option value="Entertainment">Entertainment</option>
+                      <option value="Shopping">Shopping</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom:0;">
+                    <label for="recDay">Due Day of Month</label>
+                    <input type="number" class="form-control" id="recDay" required min="1" max="28" placeholder="Day (1-28)">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm">Add Recurring Rule</button>
+                </form>
+              </div>
+
+              <!-- Active Recurring List -->
+              <div class="glass-card">
+                <h3 class="section-title" style="margin-bottom:16px;">Configured Payments</h3>
+                <div style="display:flex; flex-direction:column; gap:12px;" id="recurringListContainer">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. EMI CALCULATOR VIEW -->
+        <section id="view-emi" class="content-view">
+          <div class="emi-split">
+            <!-- Inputs -->
+            <div class="glass-card">
+              <h3 class="section-title" style="margin-bottom:20px;">Calculate Loan Payments</h3>
+              <form id="emiCalculatorForm" style="display:flex; flex-direction:column; gap:16px;">
+                <div class="form-group">
+                  <label for="emiLoanAmount">Loan Amount (Principal)</label>
+                  <input type="number" class="form-control" id="emiLoanAmount" value="500000" min="1000" required>
+                </div>
+                <div class="form-group">
+                  <label for="emiInterestRate">Annual Interest Rate (%)</label>
+                  <input type="number" class="form-control" id="emiInterestRate" value="8.5" min="0.1" step="0.05" required>
+                </div>
+                <div class="form-group">
+                  <label for="emiTenure">Tenure (Months)</label>
+                  <input type="number" class="form-control" id="emiTenure" value="24" min="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate EMI</button>
+              </form>
+            </div>
+            
+            <!-- Output Summary -->
+            <div class="glass-card emi-results-card">
+              <h3 class="section-title">Payment Summary</h3>
+              <div class="emi-kpi-row">
+                <div class="emi-kpi-card">
+                  <span class="emi-kpi-label">Monthly EMI</span>
+                  <div class="emi-kpi-val highlight" id="emi-monthly-val">₹0</div>
+                </div>
+                <div class="emi-kpi-card">
+                  <span class="emi-kpi-label">Total Interest</span>
+                  <div class="emi-kpi-val text-expense" id="emi-interest-val">₹0</div>
+                </div>
+                <div class="emi-kpi-card">
+                  <span class="emi-kpi-label">Total Payment</span>
+                  <div class="emi-kpi-val" id="emi-total-val">₹0</div>
+                </div>
+              </div>
+              
+              <!-- Visualization -->
+              <div class="chart-holder">
+                <canvas id="emiPieChart"></canvas>
+              </div>
+              
+              <!-- Amortization Schedule Drawer -->
+              <div>
+                <h4 style="font-size:13px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">Amortization Schedule</h4>
+                <div class="amortization-container">
+                  <table class="table" style="font-size:11px;">
+                    <thead>
+                      <tr>
+                        <th>Month</th>
+                        <th>Principal Paid</th>
+                        <th>Interest Paid</th>
+                        <th>Balance</th>
+                      </tr>
+                    </thead>
+                    <tbody id="emiAmortizationBody">
+                      <!-- Rendered by js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. ANALYTICS VIEW -->
+        <section id="view-analytics" class="content-view">
+          <div class="charts-grid">
+            <div class="glass-card chart-card">
+              <h3 class="section-title">Expense Category Breakdown (This Month)</h3>
+              <div class="chart-container">
+                <canvas id="expensePieChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="glass-card chart-card">
+              <h3 class="section-title">Monthly Expenses (Trends)</h3>
+              <div class="chart-container">
+                <canvas id="monthlyBarChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="glass-card chart-card">
+              <h3 class="section-title">Monthly Income vs Expenses</h3>
+              <div class="chart-container">
+                <canvas id="incomeExpenseCompareChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="glass-card chart-card">
+              <h3 class="section-title">Savings Growth Trend</h3>
+              <div class="chart-container">
+                <canvas id="savingsTrendChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. REPORTS VIEW -->
+        <section id="view-reports" class="content-view">
+          <div class="dashboard-row">
+            <!-- Controls card -->
+            <div class="glass-card report-generate-card">
+              <h3 class="section-title">Generate Report</h3>
+              <p class="health-desc">Compile a full executive summary containing savings performance, top categories, and financial indicators. You can view or save this file directly as a print-ready PDF document.</p>
+              
+              <div style="display:flex; gap:16px;">
+                <div class="form-group" style="margin-bottom:0; flex-grow:1;">
+                  <label for="reportMonthSelect">Select Billing Period</label>
+                  <select class="form-select" id="reportMonthSelect">
+                    <!-- Loaded dynamically -->
+                  </select>
+                </div>
+                <button class="btn btn-primary" style="align-self:flex-end;" id="generateReportBtn">Generate Preview</button>
+              </div>
+              
+              <button class="btn btn-secondary" id="exportReportPdfBtn" style="display:none; margin-top: 12px;">
+                <i data-lucide="download-cloud"></i> Export Report as PDF
+              </button>
+            </div>
+            
+            <!-- Achievements Box -->
+            <div class="glass-card">
+              <h3 class="section-title" style="margin-bottom:16px;">Earned Achievements</h3>
+              <div class="achievements-grid" id="achievementsGridContainer" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:16px;">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Financial Insights Feed -->
+          <div class="glass-card">
+            <h3 class="section-title" style="margin-bottom:20px;">AI Financial Insights Engine</h3>
+            <div class="insights-grid" id="insightsFeedContainer">
+              <!-- Insights rendered dynamically by JS -->
+            </div>
+          </div>
+
+          <!-- Report Preview Screen -->
+          <div id="reportPreviewContainer" style="display:none; width: 100%;">
+            <h3 class="section-title" style="margin-bottom:16px;">Report Preview</h3>
+            <div class="report-preview-pane" id="printableReportTemplate">
+              <!-- Will be compiled by js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. SETTINGS VIEW -->
+        <section id="view-settings" class="content-view">
+          <div class="glass-card" style="max-width:600px;">
+            <h3 class="section-title" style="margin-bottom:24px;">Application Settings</h3>
+            
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <!-- Currency -->
+              <div class="form-group">
+                <label for="currencySelect">Preferred Currency</label>
+                <select class="form-select" id="currencySelect">
+                  <option value="INR">INR (₹) Indian Rupee</option>
+                  <option value="USD">USD ($) US Dollar</option>
+                  <option value="EUR">EUR (€) Euro</option>
+                </select>
+                <p class="health-desc" style="font-size:11px; margin-top:4px;">Changes display format and symbol symbols across the app. Base numbers will not convert currencies dynamically.</p>
+              </div>
+
+              <!-- Backup / Restore -->
+              <div style="border-top:1px solid var(--border-glass); padding-top:20px;">
+                <h4 style="font-size:14px; font-weight:700; margin-bottom:12px;">Backup & Recovery</h4>
+                <p class="health-desc" style="margin-bottom:16px;">Export your complete profile including budgets, savings progress, and transaction records to a local file, or import it back.</p>
+                <div style="display:flex; gap:12px;">
+                  <button class="btn btn-secondary" id="exportDataBtn">
+                    <i data-lucide="download"></i> Export Data
+                  </button>
+                  <button class="btn btn-secondary" id="importDataBtn">
+                    <i data-lucide="upload"></i> Import Data
+                  </button>
+                  <input type="file" id="importDataFile" style="display:none;" accept=".json">
+                </div>
+              </div>
+
+              <!-- Factory Reset -->
+              <div style="border-top:1px solid var(--border-glass); padding-top:20px;">
+                <h4 style="font-size:14px; font-weight:700; color:var(--color-danger); margin-bottom:8px;">Danger Zone</h4>
+                <p class="health-desc" style="margin-bottom:16px;">This option deletes all custom transaction logs, savings rules, and parameters. The application will reboot with default mock data entries.</p>
+                <button class="btn btn-danger btn-sm" id="resetDataBtn">Reset Application Data</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- --- MODALS & FORMS --- -->
+
+  <!-- A. Transaction Modal (Add / Edit) -->
+  <div class="modal-overlay" id="transactionModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="txModalTitle">Add Transaction</h3>
+        <button class="btn-icon" id="txModalClose"><i data-lucide="x"></i></button>
+      </div>
+      <form id="transactionForm">
+        <input type="hidden" id="txId">
+        
+        <div class="form-group">
+          <label for="txType">Transaction Type</label>
+          <select class="form-select" id="txType" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="txCategory">Category</label>
+          <select class="form-select" id="txCategory" required>
+            <option value="Salary">Salary</option>
+            <option value="Freelancing">Freelancing</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Education">Education</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Investment">Investment</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="txAmount">Amount</label>
+          <input type="number" class="form-control" id="txAmount" required min="1" step="any" placeholder="Enter amount">
+        </div>
+
+        <div class="form-group">
+          <label for="txDate">Transaction Date</label>
+          <input type="date" class="form-control" id="txDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="txDescription">Description</label>
+          <input type="text" class="form-control" id="txDescription" placeholder="Optional details...">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="txModalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="txModalSubmit">Save Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- B. Budget Configuration Modal -->
+  <div class="modal-overlay" id="budgetModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Configure Category Budget</h3>
+        <button class="btn-icon" id="budgetModalClose"><i data-lucide="x"></i></button>
+      </div>
+      <form id="budgetForm">
+        <div class="form-group">
+          <label for="budgetCategory">Target Category</label>
+          <select class="form-select" id="budgetCategory" required>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Education">Education</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Investment">Investment</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="budgetLimit">Monthly Limit</label>
+          <input type="number" class="form-control" id="budgetLimit" required min="0" placeholder="Enter spending limit">
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="budgetModalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Budget</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- C. Savings Goal Modal -->
+  <div class="modal-overlay" id="goalModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="goalModalTitle">Create Savings Goal</h3>
+        <button class="btn-icon" id="goalModalClose"><i data-lucide="x"></i></button>
+      </div>
+      <form id="goalForm">
+        <input type="hidden" id="goalId">
+        
+        <div class="form-group">
+          <label for="goalName">Goal Name</label>
+          <input type="text" class="form-control" id="goalName" required placeholder="e.g. Emergency Fund, Japan Trip">
+        </div>
+
+        <div class="form-group">
+          <label for="goalTarget">Target Savings Amount</label>
+          <input type="number" class="form-control" id="goalTarget" required min="1" placeholder="Target amount">
+        </div>
+
+        <div class="form-group">
+          <label for="goalCurrent">Initial Savings Allocated</label>
+          <input type="number" class="form-control" id="goalCurrent" value="0" min="0" placeholder="Starting balance">
+        </div>
+
+        <div class="form-group">
+          <label for="goalDeadline">Deadline Date</label>
+          <input type="date" class="form-control" id="goalDeadline" required>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="goalModalCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="goalModalSubmit">Save Goal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- D. Goal Deposit/Withdrawal Modal -->
+  <div class="modal-overlay" id="goalFundModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="goalFundModalTitle">Adjust Goal Funds</h3>
+        <button class="btn-icon" id="goalFundModalClose"><i data-lucide="x"></i></button>
+      </div>
+      <form id="goalFundForm">
+        <input type="hidden" id="goalFundId">
+        
+        <div class="form-group">
+          <label for="goalFundAction">Action Type</label>
+          <select class="form-select" id="goalFundAction" required>
+            <option value="deposit">Deposit Funds</option>
+            <option value="withdraw">Withdraw Funds</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="goalFundAmount">Fund Amount</label>
+          <input type="number" class="form-control" id="goalFundAmount" required min="1" placeholder="Enter amount">
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="goalFundCancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Transfer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- E. Explanation Modal for Health Score -->
+  <div class="modal-overlay" id="healthExplainModal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Financial Health Calculation</h3>
+        <button class="btn-icon" id="healthExplainModalClose"><i data-lucide="x"></i></button>
+      </div>
+      <div style="font-size:13px; line-height:1.5; display:flex; flex-direction:column; gap:16px;">
+        <p>The **Financial Health Score** is computed dynamically out of 100 points based on the following three financial metrics:</p>
+        
+        <div style="border-left:3px solid var(--color-success); padding-left:12px;">
+          <h4 style="font-weight:700;">1. Monthly Savings Rate (40 Points Max)</h4>
+          <p>The percentage of income saved this month: `((Income - Expense) / Income) * 100`.</p>
+          <ul style="padding-left:16px; margin-top:4px;">
+            <li>**40 points** for a savings rate >= 30%</li>
+            <li>**30 points** for 20% to 30%</li>
+            <li>**20 points** for 10% to 20%</li>
+            <li>**5 to 10 points** for < 10%</li>
+          </ul>
+        </div>
+        
+        <div style="border-left:3px solid var(--color-info); padding-left:12px;">
+          <h4 style="font-weight:700;">2. Budget Compliance (30 Points Max)</h4>
+          <p>Discipline in staying within your configured category budgets.</p>
+          <ul style="padding-left:16px; margin-top:4px;">
+            <li>**30 points** if no category budgets are breached.</li>
+            <li>**15 points** if 1 category budget is breached.</li>
+            <li>**0 points** if multiple category budgets are breached.</li>
+          </ul>
+        </div>
+
+        <div style="border-left:3px solid var(--color-primary); padding-left:12px;">
+          <h4 style="font-weight:700;">3. Income-to-Expense Compliance (30 Points Max)</h4>
+          <p>Ensures current monthly income fully covers expenditure.</p>
+          <ul style="padding-left:16px; margin-top:4px;">
+            <li>**30 points** if net balance is positive (Income > Expenses).</li>
+            <li>**0 points** if you spent more than you earned (deficit).</li>
+          </ul>
+        </div>
+        
+        <p>Keeping a score above **85** keeps you in the **Excellent** tier, helping you reach your long-term wealth goals faster!</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="healthExplainCloseBtn">Got it</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- F. Dynamic Confirmation Dialog -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal-content glass-card" style="max-width:400px;">
+      <h3 class="modal-title" id="confirmTitle" style="margin-bottom:12px;">Are you sure?</h3>
+      <p class="health-desc" id="confirmMessage" style="margin-bottom:24px; font-size:13px; line-height:1.4;">This operation is irreversible.</p>
+      <div class="modal-footer" style="margin-top:0;">
+        <button class="btn btn-secondary btn-sm" id="confirmCancelBtn">Cancel</button>
+        <button class="btn btn-danger btn-sm" id="confirmOkBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- G. Achievement Unlocked Overlay notification -->
+  <div class="modal-overlay" id="achievementUnlockModal" style="z-index: 3000;">
+    <div class="modal-content glass-card" style="max-width: 380px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; border-color: var(--color-warning);">
+      <div class="achievement-trophy" style="background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, rgba(245, 158, 11, 0.05) 70%); color: var(--color-warning); font-size: 32px; width: 80px; height: 80px;">🏆</div>
+      <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--color-warning); letter-spacing: 1px;">Achievement Unlocked!</span>
+      <h3 class="modal-title" id="unlockedAchName" style="margin-bottom: 0;">Disciplined Budgeter</h3>
+      <p class="health-desc" id="unlockedAchDesc" style="font-size: 13px; line-height: 1.4;">You stayed fully within monthly budgets</p>
+      <button class="btn btn-primary btn-sm" id="achievementUnlockCloseBtn" style="width: 100%; margin-top: 8px;">Awesome!</button>
+    </div>
+  </div>
+
+  <!-- Third-Party CDNs -->
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- html2pdf.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- App Orchestrator Module (ES6 Modules) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
